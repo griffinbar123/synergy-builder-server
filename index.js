@@ -54,9 +54,10 @@ app.post("/api/champs", async (req, res, next) => {
         console.log(`child process close all stdio with code ${code}`);
         // send data to browser
         res.setHeader('Content-Type', 'application/json');
-        // console.log(d)
+        console.log(d)
         js = JSON.parse(d)
         jsn = {"win": 0.25, "status_code": 200}
+        console.log("sending response: ", jsn)
         // js.status = 200
         res.send(jsn);
     });
