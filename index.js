@@ -64,6 +64,11 @@ app.post("/api/champs", async (req, res, next) => {
     // res.end()
 });
 
+app.get("/api/champs", async (req, res, next) => {
+    res.send(JSON.stringify({"hi": "hi"}));
+
+    // res.end()
+});
 
 app.listen(5000, () => {
     console.log("Server running on port 5000");
