@@ -18,6 +18,17 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+
+function isJsonString(str) {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return false;
+    }
+    return true;
+}
+
+
 app.post("/api/champs", async (req, res, next) => {
     console.log(req.body);
     // await sleep(1000);
@@ -54,8 +65,11 @@ app.post("/api/champs", async (req, res, next) => {
         console.log(`child process close all stdio with code ${code}`);
         // send data to browser
         res.setHeader('Content-Type', 'application/json');
-        console.log(d)
-        js = JSON.parse(d)
+        console.log("d:", d)
+        js = null
+        if(isJsonString(d)) {
+            js = JSON.parse(d)
+        }
         jsn = {"win": 0.25, "status_code": 200}
         console.log("sending response: ", jsn)
         // js.status = 200
