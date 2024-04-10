@@ -58,7 +58,7 @@ app.post("/api/champs", async (req, res, next) => {
     var d = "";
     const pythonProcess = spawn('python3',["./fill_files.py", req.body["tier"], req.body["participants"][0], req.body["participants"][1], req.body["participants"][2], req.body["participants"][3], req.body["participants"][4], req.body["participants"][5], req.body["participants"][6], req.body["participants"][7], req.body["participants"][8], req.body["participants"][9]]);
     pythonProcess.stdout.on('data', (data) => {
-        // console.log("GETTING DATA:", data.toString());
+        console.log("GETTING DATA:", data.toString());
         d = d + data.toString();
        });
     pythonProcess.on('close', (code) => {
