@@ -137,10 +137,11 @@ app.post("/api/champs", async (req, res, next) => {
 
     // send data to browser
     res.setHeader('Content-Type', 'application/json');
-    console.log("d:", d)
+    // console.log("d:", d)
     js = null
     if(isJsonString(d)) {
         js = JSON.parse(d)
+        console.log("successfully loaded json")
     }
     jsn = {"win": 0.25, "status_code": 200}
     console.log("sending response: ", jsn)
