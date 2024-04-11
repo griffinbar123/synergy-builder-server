@@ -128,7 +128,7 @@ app.post("/api/champs", async (req, res, next) => {
     if(!participantsAreValid){
         console.log("invalid participant")
         return res.status(400).send({
-            message: 'invalid participant',
+            message: 'Select valid participant',
             status_code: 400
          });
     }
