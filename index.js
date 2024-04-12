@@ -132,17 +132,20 @@ app.post("/api/champs", async (req, res, next) => {
             status_code: 400
          });
     }
-
-    var d = await get_match(req.body["tier"], [req.body["participants"][0], req.body["participants"][1], req.body["participants"][2], req.body["participants"][3], req.body["participants"][4], req.body["participants"][5], req.body["participants"][6], req.body["participants"][7], req.body["participants"][8], req.body["participants"][9]])
-
+    try {
+        var js = await get_match(req.body["tier"], [req.body["participants"][0], req.body["participants"][1], req.body["participants"][2], req.body["participants"][3], req.body["participants"][4], req.body["participants"][5], req.body["participants"][6], req.body["participants"][7], req.body["participants"][8], req.body["participants"][9]])
+    } catch(exception) {
+        return res.status(400).send({
+            message: 'Select valid participant',
+            status_code: 400
+        })
+    }
     // send data to browser
     res.setHeader('Content-Type', 'application/json');
     // console.log("d:", d)
-    js = null
-    if(isJsonString(d)) {
-        js = JSON.parse(d)
-        console.log("successfully loaded json")
-    }
+
+    // console.log(js)
+
     jsn = {"win": 0.25, "status_code": 200}
     console.log("sending response: ", jsn)
     // js.status = 200
