@@ -132,6 +132,21 @@ app.post("/api/champs", async (req, res, next) => {
             status_code: 400
          });
     }
+
+    const ls = spawn('python3', ['test.py', 'arg1', 'arg2']);
+
+    hi = ""
+    ls.stdout.on('data', (data) => {
+        hi += data
+    });
+
+    ls.stderr.on('data', (data) => {
+        console.log(`stderr: ${data}`);
+    });
+
+    ls.on('close', async (code) => {
+    console.log(`child process exited with code ${code}`);
+    
     try {
         var js = await get_match(req.body["tier"], [req.body["participants"][0], req.body["participants"][1], req.body["participants"][2], req.body["participants"][3], req.body["participants"][4], req.body["participants"][5], req.body["participants"][6], req.body["participants"][7], req.body["participants"][8], req.body["participants"][9]])
     } catch(exception) {
@@ -143,13 +158,14 @@ app.post("/api/champs", async (req, res, next) => {
     // send data to browser
     res.setHeader('Content-Type', 'application/json');
     // console.log("d:", d)
-
+    
     // console.log(js)
-
-    jsn = {"win": 0.25, "status_code": 200}
+    
+    jsn = {"win": 0.25, "status_code": 200, "hi": hi}
     console.log("sending response: ", jsn)
     // js.status = 200
     res.send(jsn);
+});
     
 
     // res.end()
