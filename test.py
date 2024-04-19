@@ -8,9 +8,10 @@ import numpy as np
 if len(sys.argv) == 2:
     input_data_js = json.loads(sys.argv[1])
     input_data = np.array(list(input_data_js.values()))
+    tier = input_data[0]
     input_data = input_data[1:]
     # print(f"input data {input_data}")
-    clf = load('iron_gbc.joblib')
+    clf = load("./models/" + tier.upper() + '_gbc.joblib')
     input_data = input_data.reshape(1, -1)
     win = clf.predict(input_data)
     # print(win)
