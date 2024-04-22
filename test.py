@@ -13,10 +13,13 @@ if len(sys.argv) == 2:
     # print(f"input data {input_data}")
     clf = load("./models/" + tier.upper() + '_gbc.joblib')
     input_data = input_data.reshape(1, -1)
-    win = clf.predict(input_data)
+    win = clf.predict_proba(input_data)[0]
     # print(win)
     # sys.stdout.flush()
     win_js = {"win" : win[0]}
+    
+    # print(clf.predict_proba(input_data), file=sys.stderr)
+    # sys.stderr.flush()
     print(json.dumps(win_js, indent=4))
     sys.stdout.flush()
 else:
