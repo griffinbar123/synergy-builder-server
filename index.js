@@ -29,8 +29,6 @@ function isJsonString(str) {
 }
 
 
-
-
 async function getRawChampionData(name){
     file = "./champions/" + name + ".json"
 
@@ -108,15 +106,6 @@ async function get_match(t, participants){
     return jsm
 }
 
-async function get_match_2(t, participants){
-    let jsm = {"tier": t}
-    for(let i = 0; i < participants.length; i++) {
-        let base_n = "participant_" + (i + 1).toString() + "_"
-        jsm[base_n + "championName"] = participants[i]
-    }
-    return jsm
-}
-
 
 app.post("/api/champs", async (req, res, next) => {
     console.log(req.body);
@@ -146,7 +135,7 @@ app.post("/api/champs", async (req, res, next) => {
 
     var js = null;
     try {
-        js = await get_match_2(req.body["tier"], [req.body["participants"][0], req.body["participants"][1], req.body["participants"][2], req.body["participants"][3], req.body["participants"][4], req.body["participants"][5], req.body["participants"][6], req.body["participants"][7], req.body["participants"][8], req.body["participants"][9]])
+        js = await get_match(req.body["tier"], [req.body["participants"][0], req.body["participants"][1], req.body["participants"][2], req.body["participants"][3], req.body["participants"][4], req.body["participants"][5], req.body["participants"][6], req.body["participants"][7], req.body["participants"][8], req.body["participants"][9]])
     } catch(exception) {
         return res.status(400).send({
             message: 'Select valid participant',
